@@ -16,7 +16,15 @@ describe '#all' do
     # result = conn.exec( "SELECT * FROM bookmarks" )
     expect(bookmarks).to include('http://www.makersacademy.com')
   end
+end
 
+describe '#add' do
+  it 'can add a new bookmark' do
+    bookmark = Bookmark.new('http://www.github.com')
+    bookmark.add
+    bookmarks = Bookmark.all
+    expect(bookmarks).to include('http://www.github.com')
+  end
 end
 
 # conn.exec( "SELECT * FROM bookmarks" ) do |result|

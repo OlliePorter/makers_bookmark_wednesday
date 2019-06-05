@@ -16,3 +16,12 @@ feature 'Bookmarks' do
     expect(page).to have_content "http://www.makersacademy.com"
   end
 end
+
+feature 'Add bookmark' do
+  scenario 'can submit a bookmark via a form' do
+    visit('/')
+    fill_in 'url', with: 'http://www.github.com'
+    click_button 'Submit'
+    expect(page).to have_content('http://www.github.com')
+  end
+end

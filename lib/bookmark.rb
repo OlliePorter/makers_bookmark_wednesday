@@ -1,16 +1,22 @@
 require 'pg'
+require_relative 'model_helpers'
 
 class Bookmark
+  attr_reader :all, :url
 
-  attr_reader :all
+  def initialize(url)
+    @url = url
+  end
 
   def self.all
-    if ENV['BOOKMARK_TEST'] == "test"
-      conn = PG.connect( dbname: 'bookmark_manager_test')
-    else
-      conn = PG.connect( dbname: 'bookmark_manager')
-    end
+      conn = setting_database
       result = conn.exec( "SELECT * FROM bookmarks" )
       result.map { |row| row['url'] }
   end
+
+  def add
+    conn = setting_database
+    conn.exec("INSERT INTO bookmarks (url) VALUES ('#{@url}');")
+  end
+
 end
