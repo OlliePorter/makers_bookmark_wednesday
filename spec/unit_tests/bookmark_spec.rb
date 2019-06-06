@@ -20,10 +20,11 @@ end
 
 describe '#add' do
   it 'can add a new bookmark' do
-    bookmark = Bookmark.new('http://www.github.com')
+    bookmark = Bookmark.new('http://www.github.com','Github')
     bookmark.add
     bookmarks = Bookmark.all
     expect(bookmarks).to include('http://www.github.com')
+    expect(bookmarks).to include('Github')
   end
 end
 
